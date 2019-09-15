@@ -14,12 +14,12 @@ namespace demo_minesweeper
             int argsL = args.Length;
             int[] argsP = new int[argsL];
             
-            //SIMPLE PARSER v0.1
+            //SIMPLE ARGUMENT PARSER v0.1
             // if( argsL > 0 ) fieldHeight=Convert.ToInt32(args[0]);
             // if( argsL > 1 ) fieldWidth=Convert.ToInt32(args[1]);
             // if( argsL > 2 ) fieldSeed=Convert.ToInt32(args[2]);
 
-            //SIMPLE PARSER v0.2
+            //SIMPLE ARGUMENT PARSER v0.2
             #region Simple Parser 0.2
             if( true ){
                 bool conDebug = false;
