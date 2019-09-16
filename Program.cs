@@ -49,6 +49,14 @@ namespace demo_minesweeper
             //gameA.AdjacencyCell(0,1);
             //gameA.VisualizeAdjacencyFull();
             gameA.VisualizeAll();
+
+            Console.Write("\n====================================\n");
+
+            gameA.InitField();
+            gameA.RandomizeField(fieldSeed,5,5);
+            
+            gameA.AdjacencyFull();
+            gameA.VisualizeAll();
         }
     }
 }

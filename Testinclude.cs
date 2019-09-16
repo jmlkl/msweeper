@@ -33,7 +33,9 @@ class gamearea {
             }
         }
     }
-    public void RandomizeField( int setSeed = 0 ) { //TODO?: add bool that 0 seed can be used?
+    public void RandomizeField( int setSeed = 0, int clicky=-1, int clickx=-1 ) { //TODO?: add bool that 0 seed can be used?
+
+        //clicky & clickx used for initial click "safe start" in game
 
         //procedure seems little bit funny
         if( setSeed == 0 ){
@@ -49,7 +51,9 @@ class gamearea {
         while( count < itemCount ) {
             int y = rnd.Next(0, height);
             int x = rnd.Next(0, width);
-            if( !grid[ y, x ] ) {
+
+            //if( y==clicky && x==clickx) Console.WriteLine("B I N G O !!!!!!!!!!!");   //DEBUG
+            if( !grid[ y, x ] && !(y==clicky && x==clickx)) {
                 grid[ y, x ] = true;
                 count++;
             }
@@ -116,6 +120,8 @@ class gamearea {
         }
     }
 
+
+
     
     public void VisualizeAdjacencyFull() { //could this and below be used by passing array, if so then I could combine VisualizeField... and rename it to more general purpose use!!!!!!
         for( int y = 0; y < height; y++ ){
@@ -138,6 +144,8 @@ class gamearea {
         }
         return _strRow;
     }
+
+    
 
     public void VisualizeAll() {
         for( int y = 0; y < height; y++ ){
