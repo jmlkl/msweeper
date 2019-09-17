@@ -53,10 +53,14 @@ namespace demo_minesweeper
             Console.Write("\n====================================\n");
 
             gameA.InitField();
-            gameA.RandomizeField(fieldSeed,5,5);
+            gameA.RandomizeField(fieldSeed,0,6);
             
             gameA.AdjacencyFull();
             gameA.VisualizeAll();
+
+            gameA.HandleUserInput("  click (1,1)");
+            
+            gameA.HandleUserInput("flag (3,4)");
         }
     }
 }

@@ -27,4 +27,25 @@ This is personal practice project to get familiar with C#
     * Or just own array etc for open area
 * Timer
 * User input
+    
+    - length, check spaces
+    - check command from array etc..
+    
+        - new game
+        - quit
+        - settings
+        - hiscore
+    
+        WHEN GAME IS READY OR TIME IS RUNNING
+        - click y,x
+            -open
+        - check area y,x 
+        - flag y,x
+     
+    * parse parameters
+    * call method
+
 * Game logic
+* Base64 or own share link system
+
+

@@ -154,6 +154,41 @@ class gamearea {
         Console.WriteLine( Report() );
     }
 
+    public void HandleUserInput( string userInput ) {
+    // TODO Needed components
+    //  length, check spaces
+    //  partial command check
+    //   check command from array etc..
+    //  - new game
+    //   - quit
+    //   - settings
+    //   - hiscore
+    //
+    //   WHEN GAME IS READY OR TIME IS RUNNING
+    //       - click y,x
+    //           -open
+    //       - check area y,x 
+    //       - flag y,x
+    //
+    //   parse parameters
+    //   call method
+
+        string[] commands = {"quit", "new", "click", "check", "flag"};
+        userInput = userInput.Trim();
+        string[] split = userInput.Split(" ");
+        
+        for( int i = 0; i < split.Length; i++) {
+            Console.WriteLine($"{i}: {split[i]}");
+        }
+        int action = -1;
+        for( int i = 0; i < commands.Length; i++ ) {
+            if( split[0] == commands[i]) action = i;
+        }
+        if( action >= 0) {
+            Console.WriteLine($"Your action is {commands[action]}");
+        } else Console.WriteLine("Not valid command!");
+    }
+
     public gamearea( int height=8, int width=8, int itemRatio = 16, int itemCount = 0) {   //byte or ushort would be enough, but it is easier to do operations with int :/
         this.height = height;
         this.width = width;
