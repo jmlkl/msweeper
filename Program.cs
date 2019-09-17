@@ -36,7 +36,7 @@ namespace demo_minesweeper
             #endregion
             //Console.WriteLine($"CONDEBUG OUTSIDE SCOPE?:{conDebug}");
 
-
+            /* 
             gamecore game = new gamecore();
             game.Report();
 
@@ -61,6 +61,21 @@ namespace demo_minesweeper
             gameA.HandleUserInput("  click (1,1)");
             
             gameA.HandleUserInput("flag (3,4)");
+            */
+
+            gameAssembled peli = new gameAssembled( fieldHeight, fieldWidth );
+            Console.Clear();
+            peli.InitGamestart(fieldSeed);
+            peli.showData();
+            int uAction = -1;
+            int cL = Console.CursorLeft;
+            int cT = Console.CursorTop;
+            while( uAction != 0 ) {
+                Console.SetCursorPosition( cL, cT );
+                string _uStr = Console.ReadLine();
+                uAction = peli.gameInput( _uStr );
+                
+            }
         }
     }
 }
