@@ -6,6 +6,12 @@ namespace demo_minesweeper
     {
         static void Main(string[] args)
         {   
+            //DateTime dateTime = DateTime.UtcNow.Date;
+            const string vDate = "v2019/09/18";
+            const string Title = "msw " + vDate;
+            Console.Title = Title;
+
+
             int fieldHeight = 8;
             int fieldWidth = 8;
             int fieldSeed = 0;
@@ -34,44 +40,17 @@ namespace demo_minesweeper
                 if( argsL > 2 && argsP[2] > 0) fieldSeed = argsP[2];
             }
             #endregion
-            //Console.WriteLine($"CONDEBUG OUTSIDE SCOPE?:{conDebug}");
-
-            /* 
-            gamecore game = new gamecore();
-            game.Report();
-
-            gamearea gameA = new gamearea(fieldHeight, fieldWidth);
-            //Console.WriteLine(gameA.Report());
-            gameA.RandomizeField(fieldSeed);
-            //gameA.VisualizeFieldFull();
-            
-            gameA.AdjacencyFull();
-            //gameA.AdjacencyCell(0,1);
-            //gameA.VisualizeAdjacencyFull();
-            gameA.VisualizeAll();
-
-            Console.Write("\n====================================\n");
-
-            gameA.InitField();
-            gameA.RandomizeField(fieldSeed,0,6);
-            
-            gameA.AdjacencyFull();
-            gameA.VisualizeAll();
-
-            gameA.HandleUserInput("  click (1,1)");
-            
-            gameA.HandleUserInput("flag (3,4)");
-            */
 
             gameAssembled peli = new gameAssembled( fieldHeight, fieldWidth );
             Console.Clear();
             peli.InitGamestart(fieldSeed);
             peli.showData();
             int uAction = -1;
-            int cL = Console.CursorLeft;
-            int cT = Console.CursorTop;
+            // int cL = Console.CursorLeft;
+            // int cT = Console.CursorTop;
+
+            // Console.ReadLine();
             while( uAction != 0 ) {
-                Console.SetCursorPosition( cL, cT );
                 string _uStr = Console.ReadLine();
                 uAction = peli.gameInput( _uStr );
                 
