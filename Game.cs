@@ -73,30 +73,67 @@ class gameAssembled{
             clicks++;
             success = true;
         }
+        System.Console.WriteLine("Done with checks!");
+        System.Console.ReadLine();
 
         return success;
     }
 
-    public void checkCell( int cy, int cx, int calc = 0 ){
+    public void checkCell( int cy, int cx ){
         
-        int _check = gArea.AdjacencyCell( cy, cx );
-        if( _check == 11) reporter.setMessage("POMMI!"); //FIXME MAGIC NUMBES
-        else if( _check == 0 && calc < 8 ) {
-            //TODO IF pasta, using calc var temporarily to keep running time on borders
-            calc++;
-            if( CheckLimitsY( cy -1) != -1 ){
-                checkCell( cy-1, cx, calc );      //N
+        int _check = gArea.AdjacencyCellGet( cy, cx);   //needs getter
+        int _clickRes = gArea.AdjacencyCell( cy, cx );  //because this is getter does additional operation
+
+        //System.Console.WriteLine($"ch{_check} cl{_clickRes}");
+        //System.Console.ReadKey();
+        if( _clickRes == 11) reporter.setMessage("POMMI!"); //FIXME point to hard number
+        else if( _clickRes == 0 && _check == 9 ) { //FIXME point to hard number (revealed object was before unknown)
+            int system = 2;
+            if( system == 1 ) {
+                //TODO IF pasta, USE MORE ELEGANT WAY TO SOLVE THIS!            
+                int _tmp = 0;
+                if( CheckLimitsY( cy -1) != -1 ){
+                    if( gArea.AdjacencyCellGet( cy-1, cx) > 8 ) {
+                        checkCell( cy-1, cx );      //N
+                        _tmp++;
+                    }
+                }
+                if( CheckLimitsX( cx+1) != -1 ) {
+                    if( gArea.AdjacencyCellGet( cy, cx+1) > 8 ) {
+                        checkCell( cy, cx+1 );      //E
+                        _tmp++;
+                    }
+                }
+                if( CheckLimitsY( cy+1) != -1 ) {
+                    if( gArea.AdjacencyCellGet( cy+1, cx) > 8 ) {
+                        checkCell( cy+1, cx );      //S
+                        _tmp++;
+                    }
+                }
+                if( CheckLimitsX( cx-1) != -1 ) {
+                    if( gArea.AdjacencyCellGet( cy, cx-1) > 8 ) {                
+                        checkCell( cy, cx-1 );    //W
+                        _tmp++;
+                    }
+                }
+                
+                //System.Console.WriteLine($"{cy}.{cx}: {calc} done {_tmp} things here!");
+                //System.Console.ReadLine();
+            } 
+            else if( system == 2 ) {
+                for( int _dy = -1; _dy < 2; _dy++ ) {   //Here start point of actual 3x3 area revealing loop
+                    for( int _dx = -1; _dx < 2; _dx++ ) {
+                        if( CheckLimitsY( cy + _dy) != -1 && CheckLimitsX( cx + _dx) != -1 ){
+                            if( gArea.AdjacencyCellGet( cy+_dy, cx+_dx) > 8 ) { //FIXME point to hard number
+                             checkCell( cy+_dy, cx+_dx );
+                            }
+                        }
+                    }
+                }
             }
-            if( CheckLimitsX( cx+1) != -1 ) {
-                checkCell( cy, cx+1, calc );      //E
-            }
-            if( CheckLimitsY( cy+1) != -1 ) {
-                checkCell( cy+1, cx, calc );      //S
-            }
-            if( CheckLimitsX( cx-1) != -1 ) {
-                checkCell( cy, cx-1, calc );    //W
-            }
+            
         }
+
     }
     public gameAssembled( int _h, int _w ) {
         gArea = new gamearea( _h, _w ); //TODO rename all these 3!

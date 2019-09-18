@@ -80,6 +80,10 @@ public class gamearea {
         adjacency[y, x] = CheckAdjacencyCell( y, x);
         return adjacency[y, x];
     }
+    public int AdjacencyCellGet( int y, int x ) {
+        //adjacency[y, x] = CheckAdjacencyCell( y, x);
+        return adjacency[y, x];
+    }
 
     public void AdjacencyFull() {        
         for( int y = 0; y < height; y++ ){
