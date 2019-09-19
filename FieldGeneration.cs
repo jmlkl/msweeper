@@ -94,11 +94,15 @@ public class gamearea {
         }
     }
 
+    public void AdjacencyCellSet( int y, int x, int value ){
+        adjacency[y, x] = value;
+    }
+
     public gamearea( int height=8, int width=8, int itemRatio = 16, int itemCount = 0) {   //byte or ushort would be enough, but it is easier to do operations with int :/
         this.height = height;
         this.width = width;
 
-        if( itemCount <= 0 ) setItemRatio( itemRatio );;
+        if( itemCount <= 0 ) setItemRatio( itemRatio );
         InitField();
     }    
 }

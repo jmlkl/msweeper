@@ -36,6 +36,7 @@ This is personal practice project to get familiar with C#
     * flag cell is 15 (0xF)
 * Has simple game loop and rough reveal system for minefield
     * Fixed and improved reveal system
+* Flag operation
 
 ## TODO
 * Improve start safe click to quaranteed 0 adjacency so, that start isn't number
@@ -70,4 +71,7 @@ This is personal practice project to get familiar with C#
 * Achievements / milestones
 
 ## Issues
-After starting game and if starting field by revealing 0,0 adjacency continous checks won't happen, maybe something to do how array is initialized
+
+Minor problem with showing clicks data when game has initiated. 
+
+~~After starting game and if starting field by revealing 0,0 adjacency continous checks won't happen, maybe something to do how array is initialized~~

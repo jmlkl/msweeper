@@ -42,6 +42,7 @@ namespace demo_minesweeper
             #endregion
 
             gameAssembled peli = new gameAssembled( fieldHeight, fieldWidth );
+            Console.ReadKey();
             Console.Clear();
             peli.InitGamestart(fieldSeed);
             peli.showData();

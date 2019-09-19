@@ -13,9 +13,9 @@ class userInput{
         string[] split = userInput.Split(" ");
         int coordy = -1;
         int coordx = -1;
-        for( int i = 0; i < split.Length; i++) {
-            Console.WriteLine($"{i}: {split[i]}");
-        }
+        // for( int i = 0; i < split.Length; i++) {
+        //     Console.WriteLine($"{i}: {split[i]}");
+        // }
         int sentAction = -1;
         if( split[0].Length > 1 ) {
             for( int i = 0; i < commandArray.Length; i++ ) {            
@@ -33,11 +33,12 @@ class userInput{
         }
 
         if( sentAction >= 0) {
-            Console.WriteLine($"Your action is {commandArray[sentAction]}");
-
+            //Console.WriteLine($"Your action is {commandArray[sentAction]}");
+            string outMessage ="";
             switch( commandArray[sentAction] ) {
                 case "new":
                     parent.NewGame();  //use resize instead of ng?
+                    parent.showData( true );
                 break;
 
                 case "quit":
@@ -49,7 +50,7 @@ class userInput{
                     break;
                 case "help":
                     parent.showData( true );
-                    string _str = "These are available actions ";   //TODO move to constructor, MUCH data inside case
+                    outMessage = "These are available actions ";   //TODO move to constructor, MUCH data inside case
                     int _l = commandArray.Length;
                     for( int i = 0; i <_l; i++ ){
                         string _suffix = ", ";
@@ -58,17 +59,19 @@ class userInput{
                         } else if( i >= _l -1){
                             _suffix = ".";
                         }
-                        _str += commandArray[i] + _suffix;
+                        outMessage += commandArray[i] + _suffix;
                     }
-                    Console.WriteLine($"{_str}"); //TODO send this string to elsewhere, structure this class to work without WriteLine???
+                    parent.addMessage( outMessage );
+                    //Console.WriteLine($"{_str}"); //TODO send this string to elsewhere, structure this class to work without WriteLine???
                     break;
                 case "open":
                     parent.clickCell( coordy, coordx);
-                    parent.showData( true );
                     break;
                 case "check":
+                    parent.addMessage("This is ACTIVE GAME related action.");
+                    break;
                 case "flag":
-                    Console.WriteLine("This is ACTIVE GAME related action.");
+                    parent.toggleFlagCell( coordy, coordx );
                     break;
                 case "redraw":
                     parent.showData( true );
@@ -77,14 +80,16 @@ class userInput{
                     parent.DebugShowFullAdj();
                     break;
                 case "error":
-                    Console.WriteLine("This is DEBUG related action.");
+                    parent.addMessage("This is DEBUG related action.");
                     break;
                 default:
-                    Console.WriteLine("This shouldn't happen.");
+                    parent.addMessage("This shouldn't happen.");
                     break;
             }
-        } else Console.WriteLine("Not valid command!");
-
+        } else {
+            parent.addMessage("Not valid command!");
+        }
+        parent.showData( true );
         return sentAction;
     }
     public userInput( gameAssembled _parent ){
