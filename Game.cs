@@ -119,7 +119,7 @@ class gameAssembled{
     public void checkCell( int cy, int cx  ){   //actual unveil operation when user clicks/opens unveiled cell/tile //TODE possibly method renaming needed
         
         int _check = gArea.AdjacencyCellGet( cy, cx);   //needs getter
-        int _clickRes = gArea.AdjacencyCell( cy, cx );  //because this is getter does additional operation
+        int _clickRes = gArea.AdjacencyCell( cy, cx );  //because this getter does additional operation
 
         //System.Console.WriteLine($"ch{_check} cl{_clickRes}");
         //System.Console.ReadKey();
@@ -141,6 +141,44 @@ class gameAssembled{
         }
     }
 
+    public void openArea( int cy, int cx ){
+        //procedure:
+        //get before revealed adjacency number of cell
+        //count flags around cell ?and mark unrevealed cells
+        //if flag value matches with it, open unrevealed cells
+        
+        int flagCount = 0;
+        int flagId = 0xF;
+        //int bombId = 0xB;
+        int blockId = 9;
+        int _check = gArea.AdjacencyCellGet( cy, cx);   //needs getter
+        if( _check > 0 && _check < 9 ) {
+            for( int _dy = -1; _dy < 2; _dy++ ) {   //Here start point of actual 3x3 area revealing loop //FIXME REUSED FOR LOOP!
+                for( int _dx = -1; _dx < 2; _dx++ ) {
+                    if( CheckLimitsY( cy + _dy) != -1 && CheckLimitsX( cx + _dx) != -1 ){
+                        if( gArea.AdjacencyCellGet( cy+_dy, cx+_dx) == flagId ) {
+                            flagCount++;
+                        }
+                    }
+                }
+            }
+
+            if( _check == flagCount ) {
+                for( int _dy = -1; _dy < 2; _dy++ ) {   //Here start point of actual 3x3 area revealing loop //FIXME REUSED FOR LOOP!
+                    for( int _dx = -1; _dx < 2; _dx++ ) {
+                        if( CheckLimitsY( cy + _dy) != -1 && CheckLimitsX( cx + _dx) != -1 ){
+                            if( gArea.AdjacencyCellGet( cy+_dy, cx+_dx) == blockId ) { 
+                                checkCell( cy+_dy, cx+_dx);
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+        //addMessage($"flags found:{flagCount.ToString()} cell value: {_check.ToString()}");
+
+    }
     public void addMessage( string message ) {
         reporter.setMessage( message );
     }

@@ -3,8 +3,8 @@ using System;
 class userInput{
 
     private gameAssembled parent;
-    public static readonly string[] commandArray = {"quit", "exit", "new", "help", "settings", "open", "check", "flag", "debug", "show", "redraw", "error"};
-    //qu ex ne he se op ch fl de sh re er
+    public static readonly string[] commandArray = {"quit", "exit", "new", "help", "settings", "open", "area", "flag", "debug", "show", "redraw", "error"};
+    //qu ex ne he se op ar fl de sh re er
     
 
     public int HandleUserInput( string userInput ) {
@@ -69,8 +69,9 @@ class userInput{
                     parent.clickCell( coordy, coordx);
                     parent.showData( true );
                     break;
-                case "check":
-                    parent.addMessage("This is ACTIVE GAME related action.");
+                case "area":
+                    //parent.addMessage("This is ACTIVE GAME related action.");
+                    parent.openArea( coordy, coordx );
                     parent.showData( true );
                     break;
                 case "flag":

@@ -38,6 +38,7 @@ This is personal practice project to get familiar with C#
     * Fixed and improved reveal system
 * Flag operation
 * New game view with number coordinates
+* Added area sweep on numbered cell when adjacent flag count is matching with cell number
 
 ## TODO
 * Improve start safe click to quaranteed 0 adjacency so, that start isn't number
@@ -57,7 +58,7 @@ This is personal practice project to get familiar with C#
         WHEN GAME IS READY OR TIME IS RUNNING
         - click y,x (Works also as timer initiator, actual start game command)
             -open
-        - check area y,x 
+        - area y,x 
         - flag y,x
 
     * Possibly numpad playing
