@@ -6,12 +6,12 @@ class gameAssembled{
 
     private bool gameRunning;   //Issues with this, remove this and later again?, something wrong with draw when doing opening action
     private int clicks;
-    private int hp ;
+    //private int hp ;
     public int gameInput( string command ) {
         return reader.HandleUserInput( command );
     }
     public void showData( bool clearScreen = false) {
-        reporter.DebugOutput( clearScreen );
+        reporter.GameOuput( clearScreen );
         if( gameRunning ) {
             addMessage($"Clicks: {clicks}");
         } else {
@@ -19,6 +19,14 @@ class gameAssembled{
         }
     }
 
+    public void showDebug( bool clearScreen = false) {
+        reporter.DebugOutput( clearScreen );
+        if( gameRunning ) {
+            addMessage($"Clicks: {clicks}");
+        } else {
+            addMessage("GAME IS NOT RUNNING!");
+        }
+    }
     public void NewGame() {
         gArea.InitField();
         clicks = 0;
@@ -108,7 +116,7 @@ class gameAssembled{
         }
     }
 
-    public void checkCell( int cy, int cx ){
+    public void checkCell( int cy, int cx  ){   //actual unveil operation when user clicks/opens unveiled cell/tile //TODE possibly method renaming needed
         
         int _check = gArea.AdjacencyCellGet( cy, cx);   //needs getter
         int _clickRes = gArea.AdjacencyCell( cy, cx );  //because this is getter does additional operation
@@ -120,50 +128,15 @@ class gameAssembled{
                 addMessage("POMMI!"); //FIXME point to hard number
                 gameRunning = false;
             }else if( _clickRes == 0 ) { //FIXME point to hard number (revealed object was before unknown)
-                int system = 2;
-                if( system == 1 ) {
-                    //TODO IF pasta, USE MORE ELEGANT WAY TO SOLVE THIS!            
-                    int _tmp = 0;
-                    if( CheckLimitsY( cy -1) != -1 ){
-                        if( gArea.AdjacencyCellGet( cy-1, cx) > 8 ) {
-                            checkCell( cy-1, cx );      //N
-                            _tmp++;
-                        }
-                    }
-                    if( CheckLimitsX( cx+1) != -1 ) {
-                        if( gArea.AdjacencyCellGet( cy, cx+1) > 8 ) {
-                            checkCell( cy, cx+1 );      //E
-                            _tmp++;
-                        }
-                    }
-                    if( CheckLimitsY( cy+1) != -1 ) {
-                        if( gArea.AdjacencyCellGet( cy+1, cx) > 8 ) {
-                            checkCell( cy+1, cx );      //S
-                            _tmp++;
-                        }
-                    }
-                    if( CheckLimitsX( cx-1) != -1 ) {
-                        if( gArea.AdjacencyCellGet( cy, cx-1) > 8 ) {                
-                            checkCell( cy, cx-1 );    //W
-                            _tmp++;
-                        }
-                    }
-                    
-                    //System.Console.WriteLine($"{cy}.{cx}: {calc} done {_tmp} things here!");
-                    //System.Console.ReadLine();
-                } 
-                else if( system == 2 ) {
-                    for( int _dy = -1; _dy < 2; _dy++ ) {   //Here start point of actual 3x3 area revealing loop
-                        for( int _dx = -1; _dx < 2; _dx++ ) {
-                            if( CheckLimitsY( cy + _dy) != -1 && CheckLimitsX( cx + _dx) != -1 ){
-                                if( gArea.AdjacencyCellGet( cy+_dy, cx+_dx) > 8 ) { //FIXME point to hard number
+                for( int _dy = -1; _dy < 2; _dy++ ) {   //Here start point of actual 3x3 area revealing loop
+                    for( int _dx = -1; _dx < 2; _dx++ ) {
+                        if( CheckLimitsY( cy + _dy) != -1 && CheckLimitsX( cx + _dx) != -1 ){
+                            if( gArea.AdjacencyCellGet( cy+_dy, cx+_dx) > 8 ) { //FIXME point to hard number
                                 checkCell( cy+_dy, cx+_dx );
-                                }
                             }
                         }
                     }
                 }
-                
             }
         }
     }

@@ -3,8 +3,8 @@ using System;
 class userInput{
 
     private gameAssembled parent;
-    public static readonly string[] commandArray = {"quit", "exit", "new", "help", "settings", "open", "check", "flag", "debug", "redraw", "error"};
-    //qu ex ne he se op ch fl de re er
+    public static readonly string[] commandArray = {"quit", "exit", "new", "help", "settings", "open", "check", "flag", "debug", "show", "redraw", "error"};
+    //qu ex ne he se op ch fl de sh re er
     
 
     public int HandleUserInput( string userInput ) {
@@ -49,7 +49,7 @@ class userInput{
                     Console.WriteLine("This is GENERAL action.");
                     break;
                 case "help":
-                    parent.showData( true );
+                    //parent.showData( true );
                     outMessage = "These are available actions ";   //TODO move to constructor, MUCH data inside case
                     int _l = commandArray.Length;
                     for( int i = 0; i <_l; i++ ){
@@ -63,20 +63,28 @@ class userInput{
                     }
                     parent.addMessage( outMessage );
                     //Console.WriteLine($"{_str}"); //TODO send this string to elsewhere, structure this class to work without WriteLine???
+                    parent.showData( true );                    
                     break;
                 case "open":
                     parent.clickCell( coordy, coordx);
+                    parent.showData( true );
                     break;
                 case "check":
                     parent.addMessage("This is ACTIVE GAME related action.");
+                    parent.showData( true );
                     break;
                 case "flag":
                     parent.toggleFlagCell( coordy, coordx );
+                    parent.showData( true );
                     break;
                 case "redraw":
                     parent.showData( true );
                     break;
                 case "debug":
+                    //parent.DebugShowFullAdj();
+                    parent.showDebug( true );
+                    break;
+                case "show":
                     parent.DebugShowFullAdj();
                     break;
                 case "error":
@@ -88,8 +96,8 @@ class userInput{
             }
         } else {
             parent.addMessage("Not valid command!");
+            parent.showData( true );
         }
-        parent.showData( true );
         return sentAction;
     }
     public userInput( gameAssembled _parent ){

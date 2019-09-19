@@ -37,6 +37,7 @@ This is personal practice project to get familiar with C#
 * Has simple game loop and rough reveal system for minefield
     * Fixed and improved reveal system
 * Flag operation
+* New game view with number coordinates
 
 ## TODO
 * Improve start safe click to quaranteed 0 adjacency so, that start isn't number
@@ -69,6 +70,10 @@ This is personal practice project to get familiar with C#
 * Base64 or own share link system
 * History
 * Achievements / milestones
+
+* Better drawing method
+    * Right now uses clear screen and output everything again
+    * Ideal: draw only locations where has been changes
 
 ## Issues
 

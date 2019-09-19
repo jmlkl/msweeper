@@ -48,7 +48,7 @@ public class reportMethods {
         return _strRow;
     }
 
-    public string VisualizeBothRow( int y ) {
+    public string VisualizeCombined( int y ) {
         string _strRow = "";
         char[] characterList = {'.', '1', '2', '3', '4', '5', '6', '7', '8', '#', '@','*','$','%','?','P'};
         // using P for flag, # hidden, * BOMB!
@@ -59,12 +59,36 @@ public class reportMethods {
     }
     public void VisualizeAll() {
     for( int y = 0; y < gameData.height; y++ ){
-        Console.Write( $"{VisualizeFieldRow( y )} {VisualizeAdjacencyRow( y )} {VisualizeBothRow( y )} \n" );
+        Console.Write( $"{VisualizeFieldRow( y )} {VisualizeAdjacencyRow( y )} {VisualizeCombined( y )} \n" );
         }
     }
     public void DebugOutput( bool clearScreen = false) {
         if( clearScreen ) Console.Clear();
         VisualizeAll();
+        Console.WriteLine( Report() );
+    }
+
+    public void GameOuput( bool clearScreen = false ) {
+        if( clearScreen ) Console.Clear();
+        
+
+        //TODO Generate this only when size of game area happens 
+        string _zn = "";    //0 to 9
+        string _dc = "";    //tens
+        for( int x = 0; x < gameData.width; x++ ) {
+            string _n = x.ToString();
+            _zn += _n.Substring(_n.Length-1,1);
+            if( x % 10 == 0 ) {
+                _dc += $"{_n,-10}";
+            }
+        }
+
+        Console.WriteLine( $"     {_dc}" );
+        Console.WriteLine( $"     {_zn}" );
+        Console.WriteLine();
+        for( int y = 0; y < gameData.height; y++ ){
+            Console.Write($"{y,-4} {VisualizeCombined( y )} \n");
+        }
         Console.WriteLine( Report() );
     }
 
